@@ -1,2 +1,2 @@
-# arkoomaan-vidly-api- arman2develop@gmail.com
+# armanriazi-vidly-api- arman2develop@gmail.com
 
