@@ -1,4 +1,5 @@
 const express = require("express");
+const cool = require('cool-ascii-faces');
 const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
@@ -16,6 +17,8 @@ createDb();
 app.use(bodyParser.json());
 // environment
 env.selectEnvironmet();
+
+app.get('/cool', (req, res) => res.send(cool()));
 
 const port = process.env.SERVER_VIDLY_PORT || 3060;
 app.listen(port, process.env.SERVER_VIDLY_IP, () =>

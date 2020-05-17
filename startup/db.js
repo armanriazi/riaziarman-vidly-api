@@ -26,23 +26,23 @@ const opt_dev = {
 const result = {};
 
 if (process.env.NODE_VIDLY_ENV == "production") {
-  opt_prod.url="http://dbadmin:server7&@192.168.1.11:5984";      
-  result.nano = require("nano")(opt_prod);  
+  opt_prod.url =
+    "https://1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix:d3d01744b04065b9b2cb751342432180efbf1fc8a2bd7c9fc22d82a2e523f08a@1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix.cloudantnosqldb.appdomain.cloud";
+  result.nano = require("nano")(opt_prod);
   exports.db = require("nano")(opt_prod).use("dbvidly");
-  
 } else if (process.env.NODE_VIDLY_ENV == "development") {
-  opt_dev.url="http://dbadmin:server7&@192.168.1.11:5984";      
-  result.nano = require("nano")(opt_dev);  
-  exports.db = require("nano")(opt_dev).use("dbvidly");  
+  opt_dev.url = "http://dbadmin:server7&@192.168.1.11:5984";
+  result.nano = require("nano")(opt_dev);
+  exports.db = require("nano")(opt_dev).use("dbvidly");
 }
 
 exports.createDb = function () {
-  result.nano
-    .db.create("dbvidly", { partitioned: true })
+  result.nano.db
+    .create("dbvidly", { partitioned: true })
     .then((data) => {
       winston.info("Connected to db...");
     })
-  .catch((er) => {
+    .catch((er) => {
       winston.warn("Database is exist");
     });
 };
@@ -51,17 +51,16 @@ exports.createDb = function () {
 // ////Subscribe-exposes (addListener=on)
 // const loginHandler = (auth, res) => {
 //   auth.on("getedUserByEmail", (arg) => {
-   
+
 //   });
 // };
 // const generateTokenHandler = (auth, res) => {
 //   auth.on("getedTokenByRefreshToken", (arg) => {
-//      //Logging    
+//      //Logging
 //   });
 // };
 // exports.loginHandler = loginHandler;
 // exports.generateTokenHandler = generateTokenHandler;
-
 
 //const EventEmitter = require("events");
 
