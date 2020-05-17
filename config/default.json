@@ -1,0 +1,7 @@
+{
+  "jwtPrivateKey": "armanriazi_jwtPrivateKey",
+  "refreshTokenJwtPrivateKey": "armanriazi_refreshTokenJwtPrivateKey",
+  "port": 3050,
+  "tokenLife": 1800,
+  "refreshTokenLife": 86400
+}
