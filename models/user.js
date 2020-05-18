@@ -2,7 +2,8 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const _ = require("underscore");
-const {db} = require("../startup/db");
+const { db } = require("../startup/db");
+const dbDebugger = require("debug")("app:db");
 const Promise = require("bluebird");
 const PARTITION = "users:";
 
@@ -91,7 +92,8 @@ module.exports = {
       .then((final) => {
         callback(isOk(final));
       })
-      .catch(() => {
+      .catch((er) => {
+        dbDebugger(er);
         callback(objOfResDbErrMsg);
       });
   },
@@ -113,7 +115,10 @@ module.exports = {
       .then((body) => {
         callback(isOk(body));
       })
-      .catch((er) => callback(objOfResDbErrMsg));
+      .catch((er) => {
+        dbDebugger(er);
+        callback(er);
+      });
   },
 
   dbListUser(callback) {
@@ -121,7 +126,10 @@ module.exports = {
       .then((result) => {
         callback(result);
       })
-      .catch(() => callback(objOfResDbErrMsg));
+      .catch((er) => {
+        dbDebugger(er);
+        callback(objOfResDbErrMsg);
+      });
   },
 
   dbGetUser(params, callback) {
@@ -130,17 +138,21 @@ module.exports = {
       .then((result) => {
         callback(result);
       })
-      .catch(() => callback(objOfResDbErrMsg));
+      .catch(() => {
+        dbDebugger(er);
+        callback(objOfResDbErrMsg);
+      });
   },
 
   dbGetUserByEmail(params, callback) {
     const qparams = { key: params.email, include_docs: "true" };
     db.partitionedView("users", "query-users", "email", qparams)
-      .then((result) => {        
+      .then((result) => {
         callback(result);
       })
-      .catch((er) => {        
-        callback(objOfResDbErrMsg);        
+      .catch((er) => {
+        dbDebugger(er);
+        callback(objOfResDbErrMsg);
       });
   },
   validateJustEmail(user) {

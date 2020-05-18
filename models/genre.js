@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { isOk, objOfResDbErrMsg, retObjSuccDbMsg } = require("../models/result");
 const {db} = require("../startup/db");
+const dbDebugger = require("debug")("app:db");
 const PARTITION = "genres:";
 
 const validateGenre = (genre) => {
@@ -31,7 +32,8 @@ const asyncDbListGenre = () =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -46,7 +48,8 @@ const asyncDbGetGenre = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -61,7 +64,8 @@ const asyncDbGetGenreByName = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -83,7 +87,8 @@ const asyncDbAddGenre = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -98,7 +103,8 @@ const asyncDbRemoveGenre = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );

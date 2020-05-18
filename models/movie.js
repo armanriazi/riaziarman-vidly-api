@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { isOk, objOfResDbErrMsg, retObjSuccDbMsg } = require("../models/result");
 const {db} = require("../startup/db");
+const dbDebugger = require("debug")("app:db");
 const PARTITION = "movies:";
 
 const validateMovie = (movie) => {
@@ -30,7 +31,8 @@ const asyncDbListMovie = () =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -45,7 +47,8 @@ const asyncDbGetMovieByName = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -60,7 +63,8 @@ const asyncDbGetMovie = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -74,7 +78,8 @@ const asyncDbUpdateNumberInStockMovie = (params) =>
         .then((response) => {
           return isOk({ ok: response });
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -98,7 +103,8 @@ const asyncDbAddMovie = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -113,7 +119,8 @@ const asyncDbRemoveMovie = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );

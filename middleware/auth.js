@@ -9,6 +9,7 @@ module.exports = function (req, res, next) {
   if (!token) return  resErrMsg(res,401,"Access denied. No token provided.");
 
   try {
+
     jwt.verify(token, config.get("jwtPrivateKey"), function (err, decoded) {
         
       if (err && err.name === "TokenExpiredError") {

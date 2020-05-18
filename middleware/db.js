@@ -1,10 +1,9 @@
-const nano = require("nano")("http://dbadmin:server7&@192.168.1.11:5984");
+const { db } = require("../startup/db");
 const winston = require("winston");
 
 module.exports = (req, res, next) => {
   try {
-    nano.db
-      .get("dbvidly")
+    db.get("dbvidly")
       .then((data) => {
         if (data.db_name === "dbvidly")
           winston.info("Successed-connected to the actived db");
@@ -18,6 +17,3 @@ module.exports = (req, res, next) => {
     winston.error("Invalid Connection to Db (400)");
   }
 };
-
-
-

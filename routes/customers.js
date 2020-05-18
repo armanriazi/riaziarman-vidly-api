@@ -11,7 +11,7 @@ const {
   isOk,
 } = require("../models/result");
 
-router.get("/", async (req, res) => {
+router.get("/",  async (req, res) => {
   const customer = await dbCustomers.asyncDbListCustomer();
   if (customer != undefined && _.size(customer.rows) > 0) {
     res.json(retObjSuccDbMsg(customer));
@@ -20,14 +20,14 @@ router.get("/", async (req, res) => {
   } else return resErrMsg(res, 404, "4041");
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id",  async (req, res) => {
   const customer = await dbCustomers.asyncDbGetCustomer(req.params);
   if (customer._id !== undefined && customer._id.length > 0)
     res.json(retObjSuccDbMsg(customer));
   else return resErrMsg(res, 404, "4041");
 });
 
-router.get("/name/:name", async (req, res) => {
+router.get("/name/:name",  async (req, res) => {
   const { error } = dbCustomers.validateJustName(req.params);
   if (error) return resErrMsg(res, 400, error.details[0].message);
   const ctm = await dbCustomers.asyncDbGetCustomerByName({

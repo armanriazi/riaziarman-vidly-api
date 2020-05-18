@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { isOk, objOfResDbErrMsg, retObjSuccDbMsg } = require("../models/result");
 const {db} = require("../startup/db");
+const dbDebugger = require("debug")("app:db");
 const PARTITION = "rentals:";
 
 const validateRental = (rental) => {
@@ -32,7 +33,8 @@ const asyncDbListRental = () =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -47,7 +49,8 @@ const asyncDbGetRentalByName = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -62,7 +65,8 @@ const asyncDbGetRental = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -88,6 +92,7 @@ const asyncDbAddRental = (params) =>
           return isOk(body);
         })
         .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -102,7 +107,8 @@ const asyncDbRemoveRental = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );

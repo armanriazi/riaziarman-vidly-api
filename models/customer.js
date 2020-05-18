@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { isOk, objOfResDbErrMsg, retObjSuccDbMsg } = require("../models/result");
 const {db} = require("../startup/db");
+const dbDebugger = require("debug")("app:db");
 const PARTITION = "customers:";
 
 const validateCustomer = (customer) => {
@@ -30,7 +31,8 @@ const asyncDbListCustomer = () =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -45,7 +47,8 @@ const asyncDbGetCustomerByName = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -60,7 +63,8 @@ const asyncDbGetCustomer = (params) =>
         .then((result) => {
           return result;
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -83,7 +87,8 @@ const asyncDbAddCustomer = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );
@@ -98,7 +103,8 @@ const asyncDbRemoveCustomer = (params) =>
         .then((body) => {
           return isOk(body);
         })
-        .catch(() => {
+        .catch((er) => {
+          dbDebugger(er);
           return objOfResDbErrMsg;
         })
     );

@@ -12,7 +12,7 @@ const winston = require("winston");
 const router = express.Router();
 const _ = require("underscore");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {  
   const genre = await dbGenres.asyncDbListGenre();
   if (genre != undefined && _.size(genre.rows) > 0) {
     res.json(retObjSuccDbMsg(genre));

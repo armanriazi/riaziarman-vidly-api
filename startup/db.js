@@ -1,5 +1,6 @@
 const agentkeepalive = require("agentkeepalive");
 const winston = require("winston");
+const dbDebugger = require("debug")("app:db");
 
 const myagent = new agentkeepalive({
   maxSockets: 100,
@@ -43,6 +44,7 @@ exports.createDb = function () {
       winston.info("Connected to db...");
     })
     .catch((er) => {
+      dbDebugger(er);
       winston.warn("Database is exist");
     });
 };
