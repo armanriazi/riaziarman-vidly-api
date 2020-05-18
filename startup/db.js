@@ -28,7 +28,7 @@ const result = {};
 
 if (process.env.NODE_VIDLY_ENV == "production") {
   opt_prod.url =
-    "https://1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix:d3d01744b04065b9b2cb751342432180efbf1fc8a2bd7c9fc22d82a2e523f08a@1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix.cloudantnosqldb.appdomain.cloud";
+    "http://dbadmin:server7&@192.168.1.11:5984";
   result.nano = require("nano")(opt_prod);
   exports.db = require("nano")(opt_prod).use("dbvidly");
 } else if (process.env.NODE_VIDLY_ENV == "development") {
