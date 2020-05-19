@@ -8,6 +8,11 @@ var mung = require("express-mung");
 const config = require("config");
 const app = express();
 
+// get one unique id
+//couch.uniqid().then(ids => ids[0]);
+// get N unique ids
+//couch.uniqid(N).then(ids => ids.map(...));
+
 //middelware
 app.use(
   mung.json(function transform(body, req, res) {

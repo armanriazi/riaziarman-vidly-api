@@ -1,6 +1,13 @@
 const agentkeepalive = require("agentkeepalive");
 const winston = require("winston");
 const dbDebugger = require("debug")("app:db");
+const Cloudant = require("@cloudant/cloudant");
+const username = "1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix";
+const password =
+  "d3d01744b04065b9b2cb751342432180efbf1fc8a2bd7c9fc22d82a2e523f08a";
+const url =
+  "https://1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix:d3d01744b04065b9b2cb751342432180efbf1fc8a2bd7c9fc22d82a2e523f08a@1ea70936-0600-4e1a-8ac6-8069a58fe0d2-bluemix.cloudantnosqldb.appdomain.cloud";
+const cloudant = Cloudant({ url: url, username: username, password: password });
 
 const myagent = new agentkeepalive({
   maxSockets: 100,
@@ -12,6 +19,7 @@ const opt_prod = {
   url: "",
   parseUrl: false,
   requestDefaults: {
+    protocol: "https",
     agent: myagent,
     // "proxy" : "http://someproxy"
   },
@@ -27,10 +35,8 @@ const opt_dev = {
 const result = {};
 
 if (process.env.NODE_VIDLY_ENV == "production") {
-  opt_prod.url =
-    "http://dbadmin:server7&@192.168.1.11:5984";
-  result.nano = require("nano")(opt_prod);
-  exports.db = require("nano")(opt_prod).use("dbvidly");
+  result.nano = cloudant.db;
+  exports.db = cloudant.db.use("dbvidly");
 } else if (process.env.NODE_VIDLY_ENV == "development") {
   opt_dev.url = "http://dbadmin:server7&@192.168.1.11:5984";
   result.nano = require("nano")(opt_dev);
@@ -38,6 +44,7 @@ if (process.env.NODE_VIDLY_ENV == "production") {
 }
 
 exports.createDb = function () {
+  if(result.nano.db!=undefined)
   result.nano.db
     .create("dbvidly", { partitioned: true })
     .then((data) => {

@@ -33,6 +33,7 @@
   },
   "homepage": "https://gitlab.com:gitlabarmanriazi/armanriazi-vidly-api#README",
   "dependencies": {
+    "@cloudant/cloudant": "^4.2.4",
     "agentkeepalive": "^4.1.0",
     "bcrypt": "^3.0.0",
     "bluebird": "^3.7.2",
