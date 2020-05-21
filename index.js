@@ -1,7 +1,5 @@
 require("./startup/logging");
-const express = require("express"),
-  http = require("http"),
-  https = require("https");
+const express = require("express");
 const morgan = require("morgan");
 const startupDebugger = require("debug")("app:startup");
 const cool = require("cool-ascii-faces");
@@ -28,7 +26,7 @@ require("./startup/logging");
 const env = require("./startup/environment");
 require("./startup/routes")(app);
 const { createDb } = require("./startup/db");
-var port =3050;
+var port =3051;
 
 require("./startup/config")();
 require("./startup/validation")();
@@ -63,9 +61,9 @@ app.get("/", (req, res) => {
 });
 app.get("/cool", (req, res) => res.send(cool()));
 
-
-app.listen(port, port, () =>
-  winston.info(`Listening on port ${port}...`)
+console.log(port);
+var server=app.listen(port, () =>
+  winston.info(`Listening on port ${server.address().port}...`)
 );
 
 // comments
