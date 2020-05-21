@@ -9,10 +9,10 @@ production:
   image: ruby:latest
   script:
     - npm install
-    - npm run start
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=armanriazi-vidly-api --api-key=$HEROKU_API_KEY
+    - npm run start
   only:
     - master
