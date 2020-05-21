@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
 
@@ -63,8 +62,8 @@ router.post(
     newuser._id = PARTITION.concat(newuser.name);
     newuser.refreshToken = jwt.sign(
       user,
-      config.get("refreshTokenJwtPrivateKey"),
-      { expiresIn: config.get("refreshTokenLife") }
+      process.env.REFRESHTOKEN_JWT_PRIVATEKEY,
+      { expiresIn: process.env.REFRESH_TOKENLIFE }
     );
 
     user.dbAddUser(

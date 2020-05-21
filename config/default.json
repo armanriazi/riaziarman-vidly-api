@@ -1,10 +1,5 @@
 {
-  "title":"default",
-  "jwtPrivateKey": "armanriazi_jwtPrivateKey",
-  "refreshTokenJwtPrivateKey": "armanriazi_refreshTokenJwtPrivateKey",
-  "port": 3050,
-  "tokenLife": 1800,
-  "refreshTokenLife": 86400,
+  "title": "default",
   "extraBodyMessage": "Arman2Riazi@gmail.com",
   "name": "Express Dev By ArmanRiazi",
   "email": {

@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   try {
     db.get("dbvidly")
       .then((data) => {
-        if (data.db_name === "dbvidly")
+        if (data.db_name == process.env.DBNAME)
           winston.info("Successed-connected to the actived db");
         else winston.error("Failed-connected to the actived db");
       })

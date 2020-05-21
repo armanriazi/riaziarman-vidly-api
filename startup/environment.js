@@ -18,14 +18,13 @@ const selectEnvironmet = () => {
       }
       break;
     case "production":
-      const envConfigPro = require("dotenv").parse(
+      const envConfigProd = require("dotenv").parse(
         fs.readFileSync(".env.override.production")
       );
-      for (const k in envConfigPro) {
-        process.env[k] = envConfigPro[k];
+      for (const k in envConfigProd) {
+        process.env[k] = envConfigProd[k];
         winston.info(process.env[k]);
       }
-      break;
     case "stage":
       const envConfigStage = require("dotenv").parse(
         fs.readFileSync(".env.override.stage")

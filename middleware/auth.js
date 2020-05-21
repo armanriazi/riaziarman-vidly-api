@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const Auth = require("../services/auth");
 const {resErrMsg} = require("../models/result");
 
@@ -10,7 +9,7 @@ module.exports = function (req, res, next) {
 
   try {
 
-    jwt.verify(token, config.get("jwtPrivateKey"), function (err, decoded) {
+    jwt.verify(token, process.env.JWT_PRIVATEKEY, function (err, decoded) {
         
       if (err && err.name === "TokenExpiredError") {
         resErrMsg(res,400,err.name);

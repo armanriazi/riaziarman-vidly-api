@@ -8,6 +8,7 @@ var mung = require("express-mung");
 const config = require("config");
 const app = express();
 
+
 // get one unique id
 //couch.uniqid().then(ids => ids[0]);
 // get N unique ids
@@ -28,19 +29,18 @@ require("./startup/routes")(app);
 const { createDb } = require("./startup/db");
 var port = 3051;
 
-require("./startup/config")();
 require("./startup/validation")();
 
-winston.info("Application Name: " + config.get("name"));
-winston.info("Application Email: " + config.get("email.address"));
+//winston.info("Application Name: " + config.get("name"));
+//winston.info("Application Email: " + config.get("email.address"));
+
 //check connection
 createDb();
+// environment
+env.selectEnvironmet();
 
 app.set("view engine", "pug");
 app.set("views", "./views");
-
-// environment
-env.selectEnvironmet();
 
 if (process.env.NODE_ENV == "development") {
   port = process.env.SERVER_VIDLY_PORT || 3060;
@@ -48,21 +48,20 @@ if (process.env.NODE_ENV == "development") {
   startupDebugger("Morgan enabled ...");
 } else {
   port = process.env.PORT || 3060;
-  winston.info(process.env.IBM_URL_MANAGER);
-  winston.info(process.env.IBM_URL_WRITER);
-  winston.info(process.env.JWT_PRIVATEKEY);
-  winston.info(process.env.REFRESHTOKEN_JWT_PRIVATEKEY);
 }
 //
 app.get("/", (req, res) => {
   res.render("index", {
     title: "armanriazi-vidly-api",
-    message: "Welcome to Api 1.0.0",
+    message: "Welcome to the Api 1.0.0",
     rel: "icon",
     type: "image/x-icon",
     href: "https://miro.medium.com/max/256/1*zORANF0nahgJyvs3sXMMlg.png",
-    main:
-      "<p>Example API Query Genre: https://armanriazi-vidly-api.herokuapp.com/api/genres/name/comedy</p></hr><p>Example API New Generate Token: https://armanriazi-vidly-api.herokuapp.com/api/auth/yourRefToken</p></hr>",
+    main: "Example APIs",
+    p1:
+      "Query Genre:     https://armanriazi-vidly-api.herokuapp.com/api/genres/name/comedy",
+    p2:
+      "Token Generate:  https://armanriazi-vidly-api.herokuapp.com/api/auth/yourRefToken",
   });
 });
 app.get("/cool", (req, res) => res.send(cool()));

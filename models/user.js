@@ -1,4 +1,3 @@
-const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const _ = require("underscore");
@@ -17,8 +16,8 @@ const {
 module.exports = {
   generateAuthTokenSign(refreshToken, doc, res, callback) {
     const user = { _id: doc._id, password: doc.password };
-    const token = jwt.sign(user, config.get("jwtPrivateKey"), {
-      expiresIn: config.get("tokenLife"),
+    const token = jwt.sign(user, process.env.JWT_PRIVATEKEY, {
+      expiresIn: process.env.TOKENLIFE,
     });
 
     const response = Object.create({});
@@ -33,8 +32,8 @@ module.exports = {
     } else {
       const refreshToken = jwt.sign(
         user,
-        config.get("refreshTokenJwtPrivateKey"),
-        { expiresIn: config.get("refreshTokenLife") }
+        process.env.REFRESHTOKEN_JWT_PRIVATEKEY,
+        { expiresIn: process.env.REFRESH_TOKENLIFE }
       );
       doc.refreshToken = refreshToken;
       this.dbUpdateRefreshToken(doc, (result) => {
@@ -56,8 +55,8 @@ module.exports = {
   },
   generateAuthTokenOfRefreshToken(refreshToken, doc, res, callback) {
     const user = { _id: doc._id, password: doc.password };
-    const token = jwt.sign(user, config.get("jwtPrivateKey"), {
-      expiresIn: config.get("tokenLife"),
+    const token = jwt.sign(user, process.env.JWT_PRIVATEKEY, {
+      expiresIn: process.env.TOKENLIFE,
     });
     const response = Object.create({});
     if (refreshToken && refreshToken === doc.refreshToken) {
