@@ -34,26 +34,26 @@ const opt_dev = {
 
 const result = {};
 
-if (process.env.NODE_VIDLY_ENV == "production") {
+if (process.env.NODE_ENV == "production") {
   result.nano = cloudant.db;
   exports.db = cloudant.db.use("dbvidly");
-} else if (process.env.NODE_VIDLY_ENV == "development") {
+} else if (process.env.NODE_ENV == "development") {
   opt_dev.url = "http://dbadmin:server7&@192.168.1.11:5984";
   result.nano = require("nano")(opt_dev);
   exports.db = require("nano")(opt_dev).use("dbvidly");
 }
 
 exports.createDb = function () {
-  if(result.nano.db!=undefined)
-  result.nano.db
-    .create("dbvidly", { partitioned: true })
-    .then((data) => {
-      winston.info("Connected to db...");
-    })
-    .catch((er) => {
-      dbDebugger(er);
-      winston.warn("Database is exist");
-    });
+  if (result.nano.db != undefined)
+    result.nano.db
+      .create("dbvidly", { partitioned: true })
+      .then((data) => {
+        winston.info("Connected to db...");
+      })
+      .catch((er) => {
+        dbDebugger(er);
+        winston.warn("Database is exist");
+      });
 };
 
 //const Auth = require("../services/auth");

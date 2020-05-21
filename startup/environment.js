@@ -7,7 +7,7 @@ if (result.error) {
 }
 
 const selectEnvironmet = () => {
-  switch (process.env.NODE_VIDLY_ENV) {
+  switch (process.env.NODE_ENV) {
     case "development":
       const envConfigDev = require("dotenv").parse(
         fs.readFileSync(".env.override.development")
@@ -21,7 +21,7 @@ const selectEnvironmet = () => {
       const envConfigPro = require("dotenv").parse(
         fs.readFileSync(".env.override.production")
       );
-      for (const k in envConfigPro) {        
+      for (const k in envConfigPro) {
         process.env[k] = envConfigPro[k];
         winston.info(process.env[k]);
       }
@@ -37,6 +37,5 @@ const selectEnvironmet = () => {
       break;
   }
 };
-
 
 exports.selectEnvironmet = selectEnvironmet;

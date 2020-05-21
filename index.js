@@ -1,5 +1,7 @@
 require("./startup/logging");
-const express = require("express"), http = require('http'), https = require('https');
+const express = require("express"),
+  http = require("http"),
+  https = require("https");
 const morgan = require("morgan");
 const startupDebugger = require("debug")("app:startup");
 const cool = require("cool-ascii-faces");
@@ -26,6 +28,8 @@ require("./startup/logging");
 const env = require("./startup/environment");
 require("./startup/routes")(app);
 const { createDb } = require("./startup/db");
+var port =3050;
+
 require("./startup/config")();
 require("./startup/validation")();
 
@@ -40,18 +44,27 @@ app.set("views", "./views");
 // environment
 env.selectEnvironmet();
 
-if (process.env.NODE_VIDLY_ENV == "development") {
+if (process.env.NODE_ENV == "development") {
+  port = process.env.SERVER_VIDLY_PORT || 3060;
   app.use(morgan("tiny"));
   startupDebugger("Morgan enabled ...");
+}else{
+  port = process.env.PORT || 3060;
 }
 //
 app.get("/", (req, res) => {
-  res.render("index", { title: "armanriazi-vidly-api", message: "Welcome" });
+  res.render("index", {
+    title: "armanriazi-vidly-api",
+    message: "Welcome",
+    rel: "icon",
+    type: "image/x-icon",
+    href: "https://miro.medium.com/max/256/1*zORANF0nahgJyvs3sXMMlg.png",
+  });
 });
 app.get("/cool", (req, res) => res.send(cool()));
 
-const port = process.env.SERVER_VIDLY_PORT || 3060;
-app.listen(port, process.env.SERVER_VIDLY_IP, () =>
+
+app.listen(port, port, () =>
   winston.info(`Listening on port ${port}...`)
 );
 
