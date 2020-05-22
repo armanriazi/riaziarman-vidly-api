@@ -7,6 +7,7 @@ const myagent = new agentkeepalive({
   maxKeepAliveRequests: 0,
   maxKeepAliveTime: 30000,
 });
+const cloudant = null;
 //production
 try {
   const username = process.env.IBM_USERNAME_KEY_WRITER;
@@ -19,7 +20,7 @@ try {
     password: password,
   };
 
-  const cloudant = Cloudant(productionConnectionString);
+   cloudant = Cloudant(productionConnectionString);
 } catch (er) {
   dbDebugger(er);
   winston.warn(
