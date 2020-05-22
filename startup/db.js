@@ -1,4 +1,4 @@
-const agentkeepalive=require("agentkeepalive");
+const agentkeepalive = require("agentkeepalive");
 const winston = require("winston");
 const dbDebugger = require("debug")("app:db");
 const Cloudant = require("@cloudant/cloudant");
@@ -9,9 +9,9 @@ const myagent = new agentkeepalive({
 });
 //production
 try {
-  const username = process.env.IBM_USERNAME_KEY_WRITER.toString();
-  const password = process.env.IBM_USER_PASS_WRITER.toString();
-  const url = process.env.IBM_URL_WRITER.toString();
+  const username = process.env.IBM_USERNAME_KEY_WRITER;
+  const password = process.env.IBM_USER_PASS_WRITER;
+  const url = process.env.IBM_URL_WRITER;
 
   const productionConnectionString = {
     url: url,
