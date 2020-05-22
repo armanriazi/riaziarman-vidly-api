@@ -7,20 +7,6 @@ const myagent = new agentkeepalive({
   maxKeepAliveRequests: 0,
   maxKeepAliveTime: 30000,
 });
-//const cloudant = null;
-//production
-  const username = process.env.IBM_USERNAME_KEY_WRITER;
-  const password = process.env.IBM_USER_PASS_WRITER;
-  const url = process.env.IBM_URL_WRITER;
-
-  const productionConnectionString = {
-    url: url,
-    username: username,
-    password: password,
-  };
-
-const   cloudant = Cloudant(productionConnectionString);
-
 
 const result = {};
 const opt_dev = {
@@ -33,6 +19,15 @@ const opt_dev = {
 };
 
 if (process.env.NODE_ENV == "production") {
+  const username = process.env.IBM_USERNAME_KEY_WRITER;
+  const password = process.env.IBM_USER_PASS_WRITER;
+  const url = process.env.IBM_URL_WRITER;
+  const productionConnectionString = {
+    url: url,
+    username: username,
+    password: password,
+  };
+  const   cloudant = Cloudant(productionConnectionString);
   result.nano = cloudant.db;
   exports.db = cloudant.db.use("dbvidly");
 } else if (process.env.NODE_ENV == "development") {
