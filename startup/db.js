@@ -21,7 +21,7 @@ try {
 
   const cloudant = Cloudant(productionConnectionString);
 } catch (er) {
-  //dbDebugger(er);
+  dbDebugger(er);
   winston.warn(
     "Your are not in production mode and If you want it please change and set environment to production"
   );
