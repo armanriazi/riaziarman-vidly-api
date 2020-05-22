@@ -8,12 +8,6 @@ var mung = require("express-mung");
 const config = require("config");
 const app = express();
 
-
-// get one unique id
-//couch.uniqid().then(ids => ids[0]);
-// get N unique ids
-//couch.uniqid(N).then(ids => ids.map(...));
-
 //middelware
 app.use(
   mung.json(function transform(body, req, res) {
@@ -71,6 +65,12 @@ var server = app.listen(port, () =>
 );
 
 // comments
+
+// get one unique id
+//couch.uniqid().then(ids => ids[0]);
+// get N unique ids
+//couch.uniqid(N).then(ids => ids.map(...));
+
 // const port = process.env.SERVER_VIDLY_PORT || 3061;
 // // is NODE_ENV set to "development"?
 // //const DEVMODE = process.env.NODE_ENV === "development";

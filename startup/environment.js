@@ -25,6 +25,7 @@ const selectEnvironmet = () => {
         process.env[k] = envConfigProd[k];
         winston.info(process.env[k]);
       }
+      break;
     case "stage":
       const envConfigStage = require("dotenv").parse(
         fs.readFileSync(".env.override.stage")
