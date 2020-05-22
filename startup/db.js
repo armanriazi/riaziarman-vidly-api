@@ -7,9 +7,8 @@ const myagent = new agentkeepalive({
   maxKeepAliveRequests: 0,
   maxKeepAliveTime: 30000,
 });
-const cloudant = null;
+//const cloudant = null;
 //production
-try {
   const username = process.env.IBM_USERNAME_KEY_WRITER;
   const password = process.env.IBM_USER_PASS_WRITER;
   const url = process.env.IBM_URL_WRITER;
@@ -20,13 +19,9 @@ try {
     password: password,
   };
 
-   cloudant = Cloudant(productionConnectionString);
-} catch (er) {
-  dbDebugger(er);
-  winston.warn(
-    "Your are not in production mode and If you want it please change and set environment to production"
-  );
-}
+const   cloudant = Cloudant(productionConnectionString);
+
+
 const result = {};
 const opt_dev = {
   url: "",
