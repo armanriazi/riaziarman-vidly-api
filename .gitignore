@@ -1,5 +1,8 @@
 node_modules
+.vscode-root
+.git
+~/.vscode-root
+'~'/.vscode-root
 /~/.vscode-root
 ~/
 '~'/
-.git

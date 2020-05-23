@@ -8,6 +8,8 @@ var mung = require("express-mung");
 const config = require("config");
 const app = express();
 
+require("./startup/cors")(app);
+
 //middelware
 app.use(
   mung.json(function transform(body, req, res) {
