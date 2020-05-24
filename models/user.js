@@ -117,7 +117,7 @@ module.exports = {
       })
       .catch((er) => {
         dbDebugger(er);
-        callback(er);
+        callback(objOfResDbErrMsg);
       });
   },
 
