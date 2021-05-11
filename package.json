@@ -52,7 +52,7 @@
     "joi-objectid": "^2.0.0",
     "jshint": "^2.11.0",
     "jsonwebtoken": "^8.1.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "nano": "^8.2.2",
     "pug": "^2.0.4",
