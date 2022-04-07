@@ -1,5 +1,6 @@
-Online:
-https://armanriazi-vidly-api.herokuapp.com/cool
+> Help: https://armanriazi.github.io/site/public/devops/Cloud/?h=couchdb
+
+> Online: https://armanriazi-vidly-api.herokuapp.com/cool
 
 > Example APIs
 Query Genre: https://armanriazi-vidly-api.herokuapp.com/api/genres/name/comedy
